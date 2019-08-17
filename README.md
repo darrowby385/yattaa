@@ -1,4 +1,4 @@
-# やったー！
+# ![やったー！](https://user-images.githubusercontent.com/19504141/63206124-05985a00-c0f2-11e9-8f41-8a5632071260.png)
 ### Yahoo! Finance quote summaries as delicious, digestible JSON.
 
 This is a humble Ruby script designed to scrape quote summaries from Yahoo! Finance and return them as JSON, ready to feed other hungry scripts that lack the enzyme for digesting HTML.
