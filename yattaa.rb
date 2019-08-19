@@ -13,23 +13,19 @@ def process(ticker)
 	html_data = open(url).read
 	page = Nokogiri::HTML(html_data)
 
-	# Initialise arrays to house extracted data.
-	fields = []
-	values = []
-
 	# Iteratively extract fields from the quote summary and store them in the fields array.
 	# Fields are isolated using the characteristic class of their td elements: "C(black) W(51%)".
-	quote_summary_fields = page.xpath("//div[@id='quote-summary']//td[@class='C(black) W(51%)']/span").each do |field|
-		fields.push(field.text)
+	fields = page.xpath("//div[@id='quote-summary']//td[@class='C(black) W(51%)']/span").map do |field|
+		field.text
 	end
 
 	# Iteratively extract values from the quote summary and store them in the values array.
 	# Values are isolated using their data-test attributes, which consistently end in "-value", e.g. "PREV_CLOSE-value".
-	quote_summary_values = page.xpath("//div[@id='quote-summary']
+	values = page.xpath("//div[@id='quote-summary']
 		//td[string-length(substring-before(@data-test, '-value')) >= 0 
 		and  string-length(substring-after(@data-test, '-value')) = 0 
-		and contains(@data-test, '-value')]").each do |value|
-		values.push(value.text)
+		and contains(@data-test, '-value')]").map do |value|
+		value.text
 	end
 
 	# Combine fields and values arrays to create a hash, and convert the hash to JSON.
