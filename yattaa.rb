@@ -14,8 +14,8 @@ def process(ticker)
 	page = Nokogiri::HTML(html_data)
 
 	# Iteratively extract fields from the quote summary and store them in the fields array.
-	# Fields are isolated using the characteristic class of their td elements: "C(black) W(51%)".
-	fields = page.xpath("//div[@id='quote-summary']//td[@class='C(black) W(51%)']/span").map do |field|
+	# Fields are isolated using the characteristic class of their td elements: "Ta(end) Fw(600) Lh(14px)".
+	fields = page.xpath("//div[@id='quote-summary']//td[@class='Ta(end) Fw(600) Lh(14px)']/span").map do |field|
 		field.text
 	end
 
